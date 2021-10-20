@@ -233,7 +233,8 @@ int logicalNeg(int x) {
  *   Rating: 1
  */
 int tmin(void) {
-  return 2;
+  /* The minimum 32-bit signed integer is 0x80000000 which ca be written as 00000000000000000000000000000001 << 31*/
+  return 1 << 31;
 }
 /* 
  * negate - return -x 
