@@ -174,7 +174,13 @@ NOTES:
  *   Rating: 1
  */
 int bitAnd(int x, int y) {
-  return 2;
+  /*Our end product should have nonzero bits at only the locations where for both the inputs the bits at that specific location is nonzero. The remaining lcoations should only have 0 as bits.
+    To make this happen what I did was that I first inverted both the ints and then used the bitwise or to add them and the result should give me 0s at only the locations where for both inputs in the beginning
+	both of the inputs were 1 at that specific location and this is because once the inputs are inverted, only in this specific case both numbers will have 0s at the locations and once we use or for
+	the newest versions we will end up with only those specified locations having 0 bits. But we want the exact revers of this so at the end we simply invert the bits again by using ~*/
+  int result = ~x | ~y;
+  result = ~result
+  return result;
 }
 /* 
  * isEqual - return 1 if x == y, and 0 otherwise 
