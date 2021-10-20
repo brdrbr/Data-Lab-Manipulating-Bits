@@ -224,7 +224,17 @@ int isAsciiDigit(int x) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-  return 2;
+  /* Only in the case that all the bits are zero that the or statment of a number's sign by its negative version's sign should give us a 0 for the sign digit since if the number is positive,
+	 its negative will have a 1 and vice 
+	versa. But if this number is 0 its negative version will also have a 0 for the sign digit so we will end up with 0xFFFFFFE and therefore once you 0xFFFFFFFE | 0xFFFFFFFE you will get a 0xFFFFFE. 
+	For all the other cases at least one of the sign digits will be
+	a 0xFFFFFFFF and therefore we can distinguish and in all the nonzero cases we will end up with 0xFFFFFFFF due to the or statement. However we want to get the reverse of this where 
+	the all zero value sohuld output a 1 and vice versa. And therefore we increment the final value by 1, which will
+	give us a 0xfffffffe + 1 = 0xfffffff for the allzero value (which returns 1) and 0xfffffff + 1 = 0 for the nonzero values.*/
+  int normalsign = x>>31;
+  int negation = ~x + 1;
+  int negationsign = negation >> 31;
+  return ((normalsign | negationsign) + 1);
 }
 /* 
  * tmin - return minimum two's complement integer 
@@ -256,7 +266,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isGreater(int x, int y) {
-  return 2;
+  return !((x + (~y + 1)) >>31);
 }
 /* 
  * float_abs - Return bit-level equivalent of absolute value of f for
