@@ -212,7 +212,7 @@ int isAsciiDigit(int x) {
 	another words, I added the negative versions of the numbers above. In the beginning I also tried a brute force algorithm that checks if the number is equal to any of the 10 cases and 
 	then for the results of 10 cases I put an or statement to each of them to see if any of them is indeed equal to one. But when I ran it it said I used too much operators so I switched to this idea.
 	But for some reason that i did not understand 0xD0 and 0xC6, which are the exact negative versions of 0x30 and 0x3a did not work, so I tried the negated versions where once you negate the number you
-	end up getting the numbers 0xD0 and 0xC6. These numbers correspond to */
+	end up getting the numbers 0xD0 and 0xC6. These numbers correspond to 0x2F and 0x39*/
    return ((!((x+~0x2F) >> 31)) & ((x+~0x39) >> 31));
 }
 /* 
