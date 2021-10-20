@@ -205,7 +205,15 @@ int isEqual(int x, int y) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
+	/* Normally I wanted to write this as ((!((x-0x30) >> 31)) & ((x-0x3A) >> 31)) but couldnt since the - operator apparently is illegal. The idea here is that this function that I just wrote checks
+	the signs of the results by first substracting the minimum from the given number and then substracting the max + 1 from the given number. This idea allows us to determine whether or not the number is
+	indeed in the interval and if this is the case the first part should give us a 0 and the second part should give us a 1 and we will end up with !0 & 1 which ultimately will be only 1 and 0 combination
+	possibility that will give us this result of. Below I used this idea but had to come up with different numbers that will give the same result when added as the ones that we substracted above or in
+	another words, I added the negative versions of the numbers above. In the beginning I also tried a brute force algorithm that checks if the number is equal to any of the 10 cases and 
+	then for the results of 10 cases I put an or statement to each of them to see if any of them is indeed equal to one. But when I ran it it said I used too much operators so I switched to this idea.
+	But for some reason that i did not understand 0xD0 and 0xC6, which are the exact negative versions of 0x30 and 0x3a did not work, so I tried the negated versions where once you negate the number you
+	end up getting the numbers 0xD0 and 0xC6. These numbers correspond to */
+   return ((!((x+~0x2F) >> 31)) & ((x+~0x39) >> 31));
 }
 /* 
  * logicalNeg - implement the ! operator, using all of 
