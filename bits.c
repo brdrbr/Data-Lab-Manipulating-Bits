@@ -179,7 +179,7 @@ int bitAnd(int x, int y) {
 	both of the inputs were 1 at that specific location and this is because once the inputs are inverted, only in this specific case both numbers will have 0s at the locations and once we use or for
 	the newest versions we will end up with only those specified locations having 0 bits. But we want the exact revers of this so at the end we simply invert the bits again by using ~*/
   int result = ~x | ~y;
-  result = ~result
+  result = ~result;
   return result;
 }
 /* 
