@@ -190,7 +190,10 @@ int bitAnd(int x, int y) {
  *   Rating: 2
  */
 int isEqual(int x, int y) {
-  return 2;
+  /* By taking the exclusive or of the two numbers we will end up with a 0 if all of the bits are the same since if the bits are the same the operator returns 0 and if they are different the operator returns 1
+	And since the ! sign returns a 1 if the number is 0 and returns a 0 if the number is nonzero, we will end up with a 1 if and only if all of the bits are the same*/
+  int result = x ^ y;
+  return !result;
 }
 /* 
  * isAsciiDigit - return 1 if 0x30 <= x <= 0x39 (ASCII codes for characters '0' to '9')
