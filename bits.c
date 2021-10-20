@@ -233,7 +233,7 @@ int logicalNeg(int x) {
  *   Rating: 1
  */
 int tmin(void) {
-  /* The minimum 32-bit signed integer is 0x80000000 which ca be written as 00000000000000000000000000000001 << 31*/
+  /* The minimum 32-bit signed integer is 0x80000000 which ca be written as 00000000000000000000000000000001 << 31 and I have to write it like this because writing too big of a constant is not allowed*/
   return 1 << 31;
 }
 /* 
@@ -244,7 +244,9 @@ int tmin(void) {
  *   Rating: 2
  */
 int negate(int x) {
-  return 2;
+  /* During the class we learned this rule of thumb where the negative of a number is simply it being inverted + 1 and this is what I used below.*/
+  x = ~x + 1;
+  return x;
 }
 /* 
  * isGreater - if x > y  then return 1, else return 0 
