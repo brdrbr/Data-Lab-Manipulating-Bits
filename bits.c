@@ -318,5 +318,20 @@ unsigned float_abs(unsigned uf) {
  *   Rating: 4
  */
 unsigned float_twice(unsigned uf) {
+  /* Here what I tried to do was that I tried to separate the 3 components which are the sign, exponent and the fraction. However I couldn't figure out the proper ways to multipy the exponent and fraction.
+     But after my attempt of multiplying them I put thm back into their locations and gathered them together to form the new number called twice using th eor statement. I also knew that I could detect the 
+	NaN cases by checking the exponent to see whether or not it is all 1s and if this is the case it is indeed a NaN case. I know that the function does not work but I did this all for partial marks.*/
+  /*int sign = uf >> 31;
+  sign = uf << 31;
+  int exponent = ((uf << 1) >> 24);
+  int fraction = ((uf << 10) >> 10);
+  exponent = exponent + exponent;
+  fraction = fraction + fraction;
+  exponent = exponent << 23;
+  int twice = exponent | fraction | sign;
+  if (exponent = 0xFF000000)
+    return uf;
+  else
+    return twice;*/
   return 2;
 }
