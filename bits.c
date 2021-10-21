@@ -266,7 +266,19 @@ int negate(int x) {
  *   Rating: 3
  */
 int isGreater(int x, int y) {
-  return !((x + (~y + 1)) >>31);
+  /* If the signs were only restricted to +s this question wouldve been so easy but we can have 4 different combinations of signs and the combinations need different sets of actions and hence we need to 
+	seperate the cases and therefore we separate them to same sign and different sign cases but in order to do that first we obtain their signs. Then the first part of the samesign makes sure that
+	the signs are the same and hence gives a 1 if they are indeed the same. Then the second part of the and returns a 0 sign bit if the x is larger and a 1 sign biy if the y sign bit is larger due
+	to the program substracting y from x. If both conditions are met this means we get a 1 for the same sign and that y is larger and a 0 if x is larger. The different sign case is easier since 
+	we can simply compare the signs we will get a 1 if x is the positive one and a 0 if the x is the negative one. Then we get the (samesign | differentsign) command which gives us (0|0) when they 
+	have the same sign and and x is larger
+	, (1|0) when they have the same sign and y is larger,(0|0) when different signs and x is larger and (0|1) when different signs and y is larger. 
+	These outputs need to be reversed since we are asked for 1 when x is greater and hence we add a ! to the beginning.*/ 
+  int signx = x >> 31;
+  int signy = y >> 31;
+  int samesign = ((~signx ^ signy) & ((~y + x)>>31));
+  int differentsign = signx & !signy;
+  return !( samesign | differentsign);
 }
 /* 
  * float_abs - Return bit-level equivalent of absolute value of f for
