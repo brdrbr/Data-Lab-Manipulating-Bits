@@ -292,7 +292,19 @@ int isGreater(int x, int y) {
  *   Rating: 2
  */
 unsigned float_abs(unsigned uf) {
-  return 2;
+  /* Because of the format of the single-precision floating point values, we know that the leftmost digit will give us the value of the sign and hence if we can change that to 0, we will obtain the absolute
+	value. However as it is noted above, we also need to consider the NaN. By the powerpoint slides I know that the value of the minimum NaN is 0x7F800001 and any value above it we will have a NaN and
+	then we need to simply return the entering argument The reason why all the numbers that are bigger than 0x7F80001 is NaN is because by the definition we know that all the values that are bigger than
+	this number will have their exponent bits as all 1s and will for sure have at least 1 nonzero bit on the fraction bits and hence this makes sense. Since we got rid of the sign in the beginning we also
+	know that this classification also considers all of the negative NaNs as well which are very very small but since their signs became positive we know that they are bigger than the minimum NaN.We could
+	also use abs > 0x7F800000 and abs <= 0x7F800000 for the if statements as well.*/
+  int abs = uf & 0x7FFFFFFF;
+  if (abs >= 0x7F800001)
+    return uf;
+  else if (abs < 0x7F800001)
+    return abs;
+  else
+    return 0;
 }
 /* 
  * float_twice - Return bit-level equivalent of expression 2*f for
